@@ -8,10 +8,10 @@ import javax.swing.*;
 public class Home implements Pagine {
 
     private JPanel MainJpanel;
-    private MainJFrame frame;
+    private final MainJFrame frame;
     Controller controller;
 
-    public Home(MainJFrame frame, Controller controller){
+    public Home(final MainJFrame frame, Controller controller){
         this.frame = frame;
         this.controller = controller;
 

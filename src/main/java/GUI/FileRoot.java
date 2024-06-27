@@ -8,7 +8,7 @@ import javax.swing.*;
 public class FileRoot implements Pagine {
     private JPanel MainPanel;
 
-    FileRoot(MainJFrame frame,  Controller controller){
+    FileRoot(final MainJFrame frame,  Controller controller){
 
     }
 
