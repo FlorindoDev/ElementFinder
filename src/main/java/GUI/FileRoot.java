@@ -58,7 +58,7 @@ public class FileRoot implements Pagine {
 
         tree1 = new AlberoRicerca(root);
 
-        ((AlberoRicerca)tree1).BuildTree("powershell.exe Get-ChildItem -Path \\\"C:\\\" -Recurse -Filter \\\"Domande *.txt\\\" -ErrorAction SilentlyContinue");
+        ((AlberoRicerca)tree1).BuildTree("Get-ChildItem -Path 'C:\\Users\\filix\\Desktop\\file pap\\' -Recurse -Filter '*Accordo-del*06-12-2022*' -ErrorAction SilentlyContinue | Select-Object @{Expression={$_.FullName}} | Format-Table -AutoSize");
 
         ScrollPane = new JScrollPane();
         ScrollPane.add(tree1);
