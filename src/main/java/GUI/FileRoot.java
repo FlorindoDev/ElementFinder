@@ -4,8 +4,6 @@ import Controller.Controller;
 import Interfaccie.Pagine;
 
 import javax.swing.*;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -44,7 +42,7 @@ public class FileRoot implements Pagine {
     }
 
     private void createUIComponents() {
-
+        /*
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
         DefaultMutableTreeNode node1 = new DefaultMutableTreeNode("Node 1");
         DefaultMutableTreeNode node2 = new DefaultMutableTreeNode("Node 1");
@@ -54,11 +52,11 @@ public class FileRoot implements Pagine {
         node1.add(new DefaultMutableTreeNode("Child 1.2"));
         DefaultMutableTreeNode fileNode = new DefaultMutableTreeNode("file.txt");
         //fileNode.setUserObject("C:\\Users\\filix\\Desktop\\Domande Lasd.txt");
-        node2.add(fileNode);
+        node2.add(fileNode);*/
 
-        tree1 = new AlberoRicerca(root);
+        AlberoRicerca a = new AlberoRicerca("*accordo-del*","C:\\Users\\filix\\Desktop\\file pap\\Sindacato\\Accordi\\2018");
 
-        ((AlberoRicerca)tree1).BuildTree("Get-ChildItem -Path 'C:\\Users\\filix\\Desktop\\file pap\\' -Recurse -Filter '*Accordo-del*06-12-2022*' -ErrorAction SilentlyContinue | Select-Object @{Expression={$_.FullName}} | Format-Table -AutoSize");
+        tree1 = a.getTree();
 
         ScrollPane = new JScrollPane();
         ScrollPane.add(tree1);

@@ -2,22 +2,32 @@ package GUI;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class AlberoRicerca extends JTree {
+
+public class AlberoRicerca{
 
     private static boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
 
     ArrayList<String> PathFileFound = new ArrayList<String>();
 
-    public AlberoRicerca(DefaultMutableTreeNode root){
-        super(root);
+    private DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
+
+    private JTree tree;
+
+    public AlberoRicerca(String Ricerca, String Path){
+        Ricerca = FortmatRicerca(Ricerca);
+        FindElement("Get-ChildItem -Path '"+ Path + "' -Recurse -Filter '"+ Ricerca +"' -ErrorAction SilentlyContinue | Select-Object @{Expression={$_.FullName}} | Format-Table -AutoSize");
+        CreateTree();
+        tree = new JTree(root);
+        
     }
 
-    public void BuildTree(String command){
+    public void FindElement(String command){
 
         if(isWindows){
 
@@ -52,5 +62,71 @@ public class AlberoRicerca extends JTree {
             }
         }
     }
+
+
+    public ArrayList<String> GetParzialePath(int NumPath, String Arr){
+        int pos = 0;
+        int oldpos = 0;
+        String curDirecotry;
+        ArrayList<String> Path = new ArrayList<>();
+        while(pos != -1) {
+            pos = (PathFileFound.get(NumPath).substring(oldpos)).indexOf("\\");
+
+            if (pos == -1) {
+                curDirecotry = PathFileFound.get(NumPath).substring(oldpos);
+            } else {
+                curDirecotry = PathFileFound.get(NumPath).substring(oldpos, pos+oldpos);
+            }
+
+            //System.out.print("\n" + curDirecotry + pos);
+            if(!curDirecotry.toLowerCase().equals(Arr.toLowerCase())){
+                Path.add(curDirecotry);
+            }else{
+                return Path;
+            }
+
+
+            oldpos = pos+oldpos+1;
+
+        }
+
+        return Path;
+
+    }
+
+    public ArrayList<String> GetPath(int NumPath){
+        return GetParzialePath(NumPath,"Desktop");
+    }
+
+    public void CreateTree(){
+
+
+        for(int i = 0 ; i<PathFileFound.size(); i++){
+            for(String p : GetPath(i)){
+                InsertIntoTree(root, p, i);
+            }
+
+        }
+
+    }
+
+
+    public void InsertIntoTree(TreeNode node, String Dato, int numPath){
+        ArrayList<String> Path = GetParzialePath(numPath,Dato);
+        for(String Direcotry: Path){
+            for(int i = 0; i<node.getChildCount(); i++){
+
+            }
+        }
+
+    }
+
+    public String FortmatRicerca(String Ric){
+        Ric = Ric.replace(" ", "*");
+        return Ric;
+    }
+    public JTree getTree(){return tree;}
+
+
 
 }
