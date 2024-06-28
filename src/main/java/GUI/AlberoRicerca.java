@@ -11,13 +11,13 @@ import java.util.ArrayList;
 
 public class AlberoRicerca{
 
-    private static boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
 
-    ArrayList<String> PathFileFound = new ArrayList<String>();
 
-    private DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
+    ArrayList<String> PathFileFound = new ArrayList<>();
 
-    private JTree tree;
+    private final DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
+
+    private final JTree tree;
 
     public AlberoRicerca(String Ricerca, String Path){
         Ricerca = FortmatRicerca(Ricerca);
@@ -29,7 +29,7 @@ public class AlberoRicerca{
 
     public void FindElement(String command){
 
-        if(isWindows){
+        if(Main.isWindows){
 
             String[] cmd = {"powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", command};
 
@@ -79,7 +79,7 @@ public class AlberoRicerca{
             }
 
             //System.out.print("\n" + curDirecotry + pos);
-            if(!curDirecotry.toLowerCase().equals(Arr.toLowerCase())){
+            if(!curDirecotry.equalsIgnoreCase(Arr)){
                 Path.add(curDirecotry);
             }else{
                 return Path;
