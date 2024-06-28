@@ -15,7 +15,6 @@ public class ToolBar implements Pagine {
     }
 
 
-
     public JPanel getPanel(){
         return  MainPanel;
     }
