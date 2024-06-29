@@ -1,9 +1,11 @@
 package GUI;
 
 import Controller.Controller;
+import ExCustom.ElemetNotFound;
 import Interfaccie.Pagine;
 
 import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -33,7 +35,10 @@ public class FileRoot implements Pagine {
                 String Out = Path;
                 if(tp != null){
                     for(int i = 1; i< tp.getPathCount(); i++){
-                        Out += "\\" + tp.getPathComponent(i).toString();
+                        if(!(tp.getPathComponent(i).toString().equals("C:\\")) && !(Out.contains("C:\\"))){
+                            Out += "\\" + tp.getPathComponent(i).toString();
+                        }
+
                     }
                     File file = new File(Out);
                     try {
@@ -57,13 +62,23 @@ public class FileRoot implements Pagine {
         this.Path = controller.getPath();
 
         System.out.print("\n" + Path);
-        AlberoRicerca a = new AlberoRicerca("*accordo-del*",Path);
+        AlberoRicerca a = null;
+        try {
+            a = new AlberoRicerca("*accordo-del*",Path);
+            tree1 = a.getTree();
 
-        tree1 = a.getTree();
+        } catch (ElemetNotFound e) {
+            tree1 = new JTree(new DefaultMutableTreeNode("Root"));
+            JOptionPane.showMessageDialog(null, e.getMessage() , "Errore Ricerca", JOptionPane.WARNING_MESSAGE);
+
+        }
+
+
+        //tree1 = a.getTree();
 
         ScrollPane = new JScrollPane();
         ScrollPane.add(tree1);
 
-        System.out.print("\nQUI\n");
+        //System.out.print("\nQUI\n");
     }
 }

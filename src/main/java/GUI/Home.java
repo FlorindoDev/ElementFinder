@@ -30,17 +30,7 @@ public class Home implements Pagine {
         DirecotryShowser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser chooser = new JFileChooser();
-                chooser.setCurrentDirectory(new java.io.File("."));
-                chooser.setDialogTitle("Serch Directory");
-                chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                chooser.setAcceptAllFileFilterUsed(false);
-
-                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                    controller.setPath(String.valueOf(chooser.getCurrentDirectory()));
-                } else {
-                    System.out.println("No Selection ");
-                }
+                JFileChooser chooser = new DirecotrySelect(controller);
             }
         });
 
@@ -71,6 +61,7 @@ public class Home implements Pagine {
         Cerca.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                BodyContainer.removeAll();
                 BodyContainer.add(new FileRoot(frame, controller).getPanel(),gbc);
                 BodyContainer.revalidate();  // Aggiorna il layout
                 BodyContainer.repaint();

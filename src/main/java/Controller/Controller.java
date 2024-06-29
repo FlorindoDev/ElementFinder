@@ -15,7 +15,9 @@ public class Controller {
                 Path = linea;
             }
         } catch (IOException e) {
+            System.out.print("\nErrorFile\n");
             e.printStackTrace();
+
         }
     }
 
@@ -24,6 +26,7 @@ public class Controller {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
             bw.write(p);
         } catch (IOException e) {
+            System.out.print("\nErrorFile\n");
             e.printStackTrace();
         }
         Path = p;

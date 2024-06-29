@@ -1,5 +1,7 @@
 package GUI;
 
+import ExCustom.ElemetNotFound;
+
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
@@ -25,7 +27,7 @@ public class AlberoRicerca{
     private String Path;
 
 
-    public AlberoRicerca(String Ricerca, String Path){
+    public AlberoRicerca(String Ricerca, String Path) throws ElemetNotFound{
         this.Path = Path;
         this.Path = this.Path.replace(" ","");
         this.Path = this.Path + "\\";
@@ -36,7 +38,7 @@ public class AlberoRicerca{
 
     }
 
-    public void FindElement(String command){
+    public void FindElement(String command) throws ElemetNotFound{
 
         if(Main.isWindows){
 
@@ -56,7 +58,7 @@ public class AlberoRicerca{
                     if(!line.isEmpty()){
                         //System.out.print(line +"\n");
                         if(line.charAt(0) != '$' && line.charAt(0) != '-'){
-                            line = line.replace(" ","");
+                            line = line.trim();
                             line = line.replace(Path, "");
                             PathFileFound.add(line);
                         }
@@ -64,10 +66,13 @@ public class AlberoRicerca{
 
                 }
 
-                System.out.print(Path);
-                System.out.print(PathFileFound);
+                //System.out.print(Path);
+                //System.out.print(PathFileFound);
 
                 process.waitFor();
+                if(PathFileFound.isEmpty()){
+                    throw new ElemetNotFound("Elemento non trovato");
+                }
 
 
             } catch (IOException | InterruptedException e) {
