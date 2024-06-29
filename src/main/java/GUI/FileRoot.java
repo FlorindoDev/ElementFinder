@@ -16,9 +16,13 @@ public class FileRoot implements Pagine {
     private JTree tree1;
     private JScrollPane ScrollPane;
 
-    private final String Path = "C:\\Users\\filix\\Desktop\\file pap";
+    private String Path;
+
+    private  Controller controller;
 
     FileRoot(final MainJFrame frame,  Controller controller){
+
+        this.controller = controller;
 
         tree1.addMouseListener(new MouseAdapter() {
             @Override
@@ -50,6 +54,9 @@ public class FileRoot implements Pagine {
 
     private void createUIComponents() {
 
+        this.Path = controller.getPath();
+
+        System.out.print("\n" + Path);
         AlberoRicerca a = new AlberoRicerca("*accordo-del*",Path);
 
         tree1 = a.getTree();
@@ -57,5 +64,6 @@ public class FileRoot implements Pagine {
         ScrollPane = new JScrollPane();
         ScrollPane.add(tree1);
 
+        System.out.print("\nQUI\n");
     }
 }
