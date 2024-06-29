@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Objects;
 import java.util.Queue;
 
 
@@ -32,7 +31,7 @@ public class AlberoRicerca{
         Ricerca = FortmatRicerca(Ricerca);
         FindElement("Get-ChildItem -Path '"+ Path + "' -Recurse -Filter '"+ Ricerca +"' -ErrorAction SilentlyContinue | Select-Object @{Expression={$_.FullName}} | Format-Table -AutoSize");
         CreateTree();
-        tree = new JTree(root);;
+        tree = new JTree(root);
 
     }
 
