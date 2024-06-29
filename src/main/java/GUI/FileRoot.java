@@ -40,7 +40,12 @@ public class FileRoot implements Pagine {
                             Out += "\\" + tp.getPathComponent(i).toString();
                         }
                         check = true;*/
-                        Out += "\\" + tp.getPathComponent(i).toString();
+                        if(Out.length() == 3 && !check){
+                            check =true;
+                        }else{
+                            Out += "\\" + tp.getPathComponent(i).toString();
+                        }
+
                     }
                     System.out.printf(Out + "\n");
                     File file = new File(Out);
