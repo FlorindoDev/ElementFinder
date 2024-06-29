@@ -10,14 +10,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 
 public class FileRoot implements Pagine {
     private JPanel MainPanel;
     private JTree tree1;
     private JScrollPane ScrollPane;
 
-    private String Path = "C:\\Users\\filix\\Desktop\\file pap";
+    private final String Path = "C:\\Users\\filix\\Desktop\\file pap";
 
     FileRoot(final MainJFrame frame,  Controller controller){
 
@@ -27,7 +26,7 @@ public class FileRoot implements Pagine {
                 TreePath tp = tree1.getPathForLocation(e.getX(), e.getY());
                 System.out.printf(String.valueOf(tp));
                 Desktop desktop = Desktop.getDesktop();
-                String Out = new String(Path);
+                String Out = Path;
                 if(tp != null){
                     for(int i = 1; i< tp.getPathCount(); i++){
                         Out += "\\" + tp.getPathComponent(i).toString();
