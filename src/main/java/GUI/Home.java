@@ -11,8 +11,6 @@ public class Home implements Pagine {
     private JPanel MainJpanel;
     private JPanel ToolBarContainer;
     private JPanel BodyContainer;
-    private JPanel SpacePanel;
-    private JPanel SpacePanel2;
     private final MainJFrame frame;
     Controller controller;
 

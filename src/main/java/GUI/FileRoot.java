@@ -25,12 +25,12 @@ public class FileRoot implements Pagine {
                 TreePath tp = tree1.getPathForLocation(e.getX(), e.getY());
                 System.out.printf(String.valueOf(tp));
                 Desktop desktop = Desktop.getDesktop();
-                File file = new File("C:\\Users\\filix\\Desktop\\algoritmi lezione 20 grafi raggungibilita e componenti part 1 02.11.pdf");
+                /*File file = new File("C:\\Users\\filix\\Desktop\\algoritmi lezione 20 grafi raggungibilita e componenti part 1 02.11.pdf");
                 try {
                     desktop.open(file);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
-                }
+                }*/
 
             }
         });
@@ -54,7 +54,7 @@ public class FileRoot implements Pagine {
         //fileNode.setUserObject("C:\\Users\\filix\\Desktop\\Domande Lasd.txt");
         node2.add(fileNode);*/
 
-        AlberoRicerca a = new AlberoRicerca("*accordo-del*","C:\\Users\\filix\\Desktop\\file pap\\Sindacato\\Accordi\\2018");
+        AlberoRicerca a = new AlberoRicerca("*accordo-del*","C:\\Users\\filix\\Desktop\\file pap");
 
         tree1 = a.getTree();
 

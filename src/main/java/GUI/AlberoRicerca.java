@@ -7,6 +7,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Objects;
+import java.util.Queue;
 
 
 public class AlberoRicerca{
@@ -19,17 +22,25 @@ public class AlberoRicerca{
 
     private final JTree tree;
 
+    private String Path;
+
     public AlberoRicerca(String Ricerca, String Path){
+        this.Path = Path;
+        this.Path = this.Path.replace(" ","");
+        this.Path = this.Path + "\\";
+
         Ricerca = FortmatRicerca(Ricerca);
         FindElement("Get-ChildItem -Path '"+ Path + "' -Recurse -Filter '"+ Ricerca +"' -ErrorAction SilentlyContinue | Select-Object @{Expression={$_.FullName}} | Format-Table -AutoSize");
         CreateTree();
-        tree = new JTree(root);
-        
+        tree = new JTree(root);;
+
     }
 
     public void FindElement(String command){
 
         if(Main.isWindows){
+
+
 
             String[] cmd = {"powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", command};
 
@@ -47,13 +58,16 @@ public class AlberoRicerca{
                     if(!line.isEmpty()){
                         if(line.charAt(0) != '$' && line.charAt(0) != '-'){
                             line = line.replace(" ","");
+                            line = line.replace(Path, "");
                             PathFileFound.add(line);
                         }
                     }
 
                 }
 
+                System.out.print(Path);
                 System.out.print(PathFileFound);
+
                 process.waitFor();
 
 
@@ -79,7 +93,7 @@ public class AlberoRicerca{
             }
 
             //System.out.print("\n" + curDirecotry + pos);
-            if(!curDirecotry.equalsIgnoreCase(Arr)){
+            if(!curDirecotry.equalsIgnoreCase(Arr) || Path.isEmpty()){
                 Path.add(curDirecotry);
             }else{
                 return Path;
@@ -95,11 +109,10 @@ public class AlberoRicerca{
     }
 
     public ArrayList<String> GetPath(int NumPath){
-        return GetParzialePath(NumPath,"Desktop");
+        return GetParzialePath(NumPath,"");
     }
 
     public void CreateTree(){
-
 
         for(int i = 0 ; i<PathFileFound.size(); i++){
             for(String p : GetPath(i)){
@@ -110,14 +123,58 @@ public class AlberoRicerca{
 
     }
 
+    public boolean Exsist(TreeNode node, String Dato){
+        Queue<TreeNode> Q = new LinkedList<>();
+        Q.add(node);
+        while(!Q.isEmpty()){
+            node = Q.remove();
+            for(int i = 0; i<node.getChildCount(); i++){
+                Q.add(node.getChildAt(i));
+                if(node.getChildAt(i).toString().equals(Dato)){
+                    return true;
+                }
+
+            }
+
+        }
+
+        return false;
+    }
+
+    public boolean ExsistOnLevel(TreeNode node, String Dato){
+        Queue<TreeNode> Q = new LinkedList<>();
+
+        for(int i = 0; i<node.getChildCount(); i++) {
+            Q.add(node.getChildAt(i));
+        }
+        while(!Q.isEmpty()){
+            node = Q.remove();
+
+            if (node.toString().equals(Dato)) {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
 
     public void InsertIntoTree(TreeNode node, String Dato, int numPath){
         ArrayList<String> Path = GetParzialePath(numPath,Dato);
+        if(Exsist(root,Dato)) return;
+        System.out.print(Path);
         for(String Direcotry: Path){
             for(int i = 0; i<node.getChildCount(); i++){
+                if(node.getChildAt(i).toString().equals(Direcotry)) {
+                    node = node.getChildAt(i);
+                    break;
+                }
 
             }
+
         }
+
+        ((DefaultMutableTreeNode)node).add(new DefaultMutableTreeNode(Dato));
 
     }
 
