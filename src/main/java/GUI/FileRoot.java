@@ -30,16 +30,19 @@ public class FileRoot implements Pagine {
             @Override
             public void mouseReleased(MouseEvent e) {
                 TreePath tp = tree1.getPathForLocation(e.getX(), e.getY());
-                System.out.printf(String.valueOf(tp));
+                System.out.printf(String.valueOf(tp) + "\n");
                 Desktop desktop = Desktop.getDesktop();
                 String Out = Path;
+                boolean check = false;
                 if(tp != null){
                     for(int i = 1; i< tp.getPathCount(); i++){
-                        if(!(tp.getPathComponent(i).toString().equals("C:\\")) && !(Out.contains("C:\\"))){
+                        /*if(!(Out.contains("C:\\")) || check){
                             Out += "\\" + tp.getPathComponent(i).toString();
                         }
-
+                        check = true;*/
+                        Out += "\\" + tp.getPathComponent(i).toString();
                     }
+                    System.out.printf(Out + "\n");
                     File file = new File(Out);
                     try {
                         desktop.open(file);

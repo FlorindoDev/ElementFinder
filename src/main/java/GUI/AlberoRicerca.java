@@ -29,7 +29,7 @@ public class AlberoRicerca{
 
     public AlberoRicerca(String Ricerca, String Path) throws ElemetNotFound{
         this.Path = Path;
-        this.Path = this.Path.replace(" ","");
+        this.Path = this.Path.trim();
         this.Path = this.Path + "\\";
         Ricerca = FortmatRicerca(Ricerca);
         FindElement("Get-ChildItem -Path '"+ Path + "' -Recurse -Filter '"+ Ricerca +"' -ErrorAction SilentlyContinue | Select-Object @{Expression={$_.FullName}} | Out-String -Width " + lenghtStringOutConsole);
@@ -166,7 +166,7 @@ public class AlberoRicerca{
     public void InsertIntoTree(TreeNode node, String Dato, int numPath){
         ArrayList<String> Path = GetParzialePath(numPath,Dato);
         //if(Exsist(root,Dato)) return;
-        System.out.print(Path);
+        //System.out.print(Path);
         for(String Direcotry: Path){
             for(int i = 0; i<node.getChildCount(); i++){
                 if(node.getChildAt(i).toString().equals(Direcotry)) {
