@@ -19,6 +19,7 @@ public class Home implements Pagine {
     private JPanel SerchPanel;
     private JButton DirecotryShowser;
     private JButton Cerca;
+    private JLabel TextCerca;
     private final MainJFrame frame;
     Controller controller;
 
