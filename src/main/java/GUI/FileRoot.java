@@ -20,7 +20,7 @@ public class FileRoot implements Pagine {
 
     private String Path;
 
-    private  Controller controller;
+    private  final Controller controller;
 
     FileRoot(final MainJFrame frame,  Controller controller){
 
