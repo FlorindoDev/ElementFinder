@@ -14,22 +14,23 @@ import java.util.Queue;
 public class AlberoRicerca{
 
 
-
     ArrayList<String> PathFileFound = new ArrayList<>();
 
     private final DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
+
+    private  final  int lenghtStringOutConsole = 8192;
 
     private final JTree tree;
 
     private String Path;
 
+
     public AlberoRicerca(String Ricerca, String Path){
         this.Path = Path;
         this.Path = this.Path.replace(" ","");
         this.Path = this.Path + "\\";
-
         Ricerca = FortmatRicerca(Ricerca);
-        FindElement("Get-ChildItem -Path '"+ Path + "' -Recurse -Filter '"+ Ricerca +"' -ErrorAction SilentlyContinue | Select-Object @{Expression={$_.FullName}} | Format-Table -AutoSize");
+        FindElement("Get-ChildItem -Path '"+ Path + "' -Recurse -Filter '"+ Ricerca +"' -ErrorAction SilentlyContinue | Select-Object @{Expression={$_.FullName}} | Out-String -Width " + lenghtStringOutConsole);
         CreateTree();
         tree = new JTree(root);
 
@@ -38,8 +39,6 @@ public class AlberoRicerca{
     public void FindElement(String command){
 
         if(Main.isWindows){
-
-
 
             String[] cmd = {"powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", command};
 
@@ -55,6 +54,7 @@ public class AlberoRicerca{
 
                 while ((line = reader.readLine()) != null) {
                     if(!line.isEmpty()){
+                        //System.out.print(line +"\n");
                         if(line.charAt(0) != '$' && line.charAt(0) != '-'){
                             line = line.replace(" ","");
                             line = line.replace(Path, "");
@@ -160,12 +160,14 @@ public class AlberoRicerca{
 
     public void InsertIntoTree(TreeNode node, String Dato, int numPath){
         ArrayList<String> Path = GetParzialePath(numPath,Dato);
-        if(Exsist(root,Dato)) return;
+        //if(Exsist(root,Dato)) return;
         System.out.print(Path);
         for(String Direcotry: Path){
             for(int i = 0; i<node.getChildCount(); i++){
                 if(node.getChildAt(i).toString().equals(Direcotry)) {
+                    if(ExsistOnLevel(node,Dato)) return;
                     node = node.getChildAt(i);
+                    if(ExsistOnLevel(node,Dato)) return;
                     break;
                 }
 

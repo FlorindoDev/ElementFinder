@@ -8,12 +8,16 @@ import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.Objects;
 
 public class FileRoot implements Pagine {
     private JPanel MainPanel;
     private JTree tree1;
     private JScrollPane ScrollPane;
 
+    private String Path = "C:\\Users\\filix\\Desktop\\file pap";
 
     FileRoot(final MainJFrame frame,  Controller controller){
 
@@ -23,12 +27,18 @@ public class FileRoot implements Pagine {
                 TreePath tp = tree1.getPathForLocation(e.getX(), e.getY());
                 System.out.printf(String.valueOf(tp));
                 Desktop desktop = Desktop.getDesktop();
-                /*File file = new File("C:\\Users\\filix\\Desktop\\algoritmi lezione 20 grafi raggungibilita e componenti part 1 02.11.pdf");
-                try {
-                    desktop.open(file);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }*/
+                String Out = new String(Path);
+                if(tp != null){
+                    for(int i = 1; i< tp.getPathCount(); i++){
+                        Out += "\\" + tp.getPathComponent(i).toString();
+                    }
+                    File file = new File(Out);
+                    try {
+                        desktop.open(file);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
 
             }
         });
@@ -40,19 +50,8 @@ public class FileRoot implements Pagine {
     }
 
     private void createUIComponents() {
-        /*
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
-        DefaultMutableTreeNode node1 = new DefaultMutableTreeNode("Node 1");
-        DefaultMutableTreeNode node2 = new DefaultMutableTreeNode("Node 1");
-        root.add(node1);
-        root.add(node2);
-        node1.add(new DefaultMutableTreeNode("Child 1.1"));
-        node1.add(new DefaultMutableTreeNode("Child 1.2"));
-        DefaultMutableTreeNode fileNode = new DefaultMutableTreeNode("file.txt");
-        //fileNode.setUserObject("C:\\Users\\filix\\Desktop\\Domande Lasd.txt");
-        node2.add(fileNode);*/
 
-        AlberoRicerca a = new AlberoRicerca("*accordo-del*","C:\\Users\\filix\\Desktop\\file pap");
+        AlberoRicerca a = new AlberoRicerca("*accordo-del*",Path);
 
         tree1 = a.getTree();
 

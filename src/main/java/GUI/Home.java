@@ -11,6 +11,8 @@ public class Home implements Pagine {
     private JPanel MainJpanel;
     private JPanel ToolBarContainer;
     private JPanel BodyContainer;
+    private JPanel ToolBar;
+    private JPanel Body;
     private final MainJFrame frame;
     Controller controller;
 
@@ -30,17 +32,17 @@ public class Home implements Pagine {
         ToolBarContainer = new JPanel();
         BodyContainer = new JPanel();
         BodyContainer.setLayout(new GridBagLayout());
+        ToolBarContainer.setLayout(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.BOTH; // Si espande in entrambe le direzioni
+        gbc.weighty = 1.0; // Fa sì che il componente si espanda verticalmente
         gbc.weightx = 1.0; // Fa sì che il componente si espanda orizzontalmente
-
 
         ToolBarContainer.add(new ToolBar(frame).getPanel());
         BodyContainer.add(new FileRoot(frame, controller).getPanel(),gbc);
-
 
 
 
