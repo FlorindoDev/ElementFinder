@@ -29,30 +29,33 @@ public class FileRoot implements Pagine {
 
         tree1.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseReleased(MouseEvent e) {
-                TreePath tp = tree1.getPathForLocation(e.getX(), e.getY());
-                System.out.printf(String.valueOf(tp) + "\n");
-                Desktop desktop = Desktop.getDesktop();
-                String Out = Path;
-                boolean check = false;
-                if(tp != null){
-                    for(int i = 1; i< tp.getPathCount(); i++){
-                        if(Out.length() == 3 && !check){
-                            check =true;
-                        }else{
-                            Out += "\\" + tp.getPathComponent(i).toString();
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2 && !e.isConsumed()) {
+                    e.consume();
+                    TreePath tp = tree1.getPathForLocation(e.getX(), e.getY());
+                    System.out.printf(String.valueOf(tp) + "\n");
+                    Desktop desktop = Desktop.getDesktop();
+                    String Out = Path;
+                    boolean check = false;
+                    if (tp != null) {
+                        for (int i = 1; i < tp.getPathCount(); i++) {
+                            if (Out.length() == 3 && !check) {
+                                check = true;
+                            } else {
+                                Out += "\\" + tp.getPathComponent(i).toString();
+                            }
+
                         }
+                        System.out.printf(Out + "\n");
+                        File file = new File(Out);
+                        try {
+                            desktop.open(file);
+                        } catch (IOException | IllegalArgumentException ex) {
+                            JOptionPane.showMessageDialog(null, "Erore imprevisto, Messaggio:\n" + ex.getMessage(), "Errore", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
 
-                    }
-                    System.out.printf(Out + "\n");
-                    File file = new File(Out);
-                    try {
-                        desktop.open(file);
-                    } catch (IOException | IllegalArgumentException ex) {
-                        JOptionPane.showMessageDialog(null, "Erore imprevisto, Messaggio:\n" + ex.getMessage() , "Errore", JOptionPane.ERROR_MESSAGE);
-                    }
                 }
-
             }
         });
 
@@ -78,12 +81,9 @@ public class FileRoot implements Pagine {
 
         }
 
-
-        //tree1 = a.getTree();
-
+        tree1.setToggleClickCount(0);
         ScrollPane = new JScrollPane();
         ScrollPane.add(tree1);
 
-        //System.out.print("\nQUI\n");
     }
 }
