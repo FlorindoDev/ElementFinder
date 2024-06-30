@@ -101,7 +101,13 @@ public class AlberoRicerca{
 
             //System.out.print("\n" + curDirecotry + pos);
             if((!curDirecotry.equalsIgnoreCase(Arr) || Path.isEmpty()) || countpath < PathChecker.get(Arr)){
+
+                if(curDirecotry.equalsIgnoreCase(Arr) && Path.isEmpty()){
+                    Path.add(curDirecotry);
+                    return Path;
+                }
                 Path.add(curDirecotry);
+
                 if(curDirecotry.equalsIgnoreCase(Arr)){
                     countpath++;
                 }
@@ -123,6 +129,7 @@ public class AlberoRicerca{
     }
 
     public void initPathChecker(HashMap<String, Integer> Checker, ArrayList<String> Path){
+        Checker.clear();
         for(String p : Path){
             //System.out.print(p + "\n");
             Checker.put(p,0);
@@ -207,27 +214,30 @@ public class AlberoRicerca{
     public void InsertIntoTree(TreeNode node, String Dato, int numPath){
         ArrayList<String> Path = GetParzialePath(numPath,Dato);
         //if(Exsist(root,Dato)) return;
-        //System.out.print(Path);
-        //TreeNode Prec= null;
+        System.out.print("\n" + Path + "Insert: "+ Dato + "\n");
+        TreeNode pre = null;
+        boolean check = true;
         for(String Direcotry: Path){
             for(int i = 0; i<node.getChildCount(); i++){
                 if(node.getChildAt(i).toString().equals(Direcotry)) {
-                    if(ExsistOnLevel(node,Dato)) return;
-                    //Prec = node;
+                    //if(ExsistOnLevel(node,Dato)) return;
+                    pre = node;
                     node = node.getChildAt(i);
-                    if(ExsistOnLevel(node,Dato)) return;
+                    //if(ExsistOnLevel(node,Dato)) return;
+                    check = true;
                     break;
                 }
+                check = false;
 
+            }
+            if(!check){
+                break;
             }
 
         }
-        /*
-        if(node != null){
-            if(ExsistOnLevel(Prec,Dato)) return;
-            if(ExsistOnLevel(node,Dato)) return;
-        }*/
 
+        if(ExsistOnLevel(node,Dato)) return;
+        if(pre != null){if(ExsistOnLevel(pre,Dato)) return;}
 
         ((DefaultMutableTreeNode)node).add(new DefaultMutableTreeNode(Dato));
 
