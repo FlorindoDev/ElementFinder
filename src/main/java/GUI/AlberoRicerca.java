@@ -60,7 +60,6 @@ public class AlberoRicerca{
                         if(line.charAt(0) != '$' && line.charAt(0) != '-'){
                             line = line.trim();
                             line = line.replace(Path, "");
-                            //line = line.toLowerCase();
                             PathFileFound.add(line);
                         }
                     }
@@ -101,17 +100,15 @@ public class AlberoRicerca{
                 curDirecotry = PathFileFound.get(NumPath).substring(oldpos, pos+oldpos);
             }
 
-            //System.out.print("\n" + curDirecotry + pos);
+
             if((!curDirecotry.equalsIgnoreCase(Arr) || Path.isEmpty()) || countpath < PathChecker.get(Arr)){
 
                 if(curDirecotry.equalsIgnoreCase(Arr) && Path.isEmpty() && Arr.contains(":")){
-                    //Path.add(curDirecotry);
                     PathChecker.replace(Arr,PathChecker.get(Arr)+1);
                     return Path;
                 }
 
                 if(curDirecotry.equalsIgnoreCase(Arr) && Path.isEmpty() && countpath == PathChecker.get(Arr)){
-                    //Path.add(curDirecotry);
                     PathChecker.replace(Arr,PathChecker.get(Arr)+1);
                     return Path;
                 }
@@ -221,7 +218,6 @@ public class AlberoRicerca{
 
     public void InsertIntoTree(TreeNode node, String Dato, int numPath){
         ArrayList<String> Path = GetParzialePath(numPath,Dato);
-        //if(Exsist(root,Dato)) return;
         System.out.print("\n" + Path + "Insert: "+ Dato + "\n");
         boolean check = true;
         for(String Direcotry: Path){
