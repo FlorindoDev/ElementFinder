@@ -81,6 +81,7 @@ public class FileRoot implements Pagine {
 
         }
 
+
         tree1.setToggleClickCount(0);
         ScrollPane = new JScrollPane();
         ScrollPane.add(tree1);
