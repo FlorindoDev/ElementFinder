@@ -60,6 +60,7 @@ public class AlberoRicerca{
                         if(line.charAt(0) != '$' && line.charAt(0) != '-'){
                             line = line.trim();
                             line = line.replace(Path, "");
+                            //line = line.toLowerCase();
                             PathFileFound.add(line);
                         }
                     }
@@ -87,6 +88,7 @@ public class AlberoRicerca{
         int pos = 0;
         int oldpos = 0;
         int countpath = 0;
+        Arr = Arr.toLowerCase();
 
         String curDirecotry;
         ArrayList<String> Path = new ArrayList<>();
@@ -102,8 +104,15 @@ public class AlberoRicerca{
             //System.out.print("\n" + curDirecotry + pos);
             if((!curDirecotry.equalsIgnoreCase(Arr) || Path.isEmpty()) || countpath < PathChecker.get(Arr)){
 
-                if(curDirecotry.equalsIgnoreCase(Arr) && Path.isEmpty()){
-                    Path.add(curDirecotry);
+                if(curDirecotry.equalsIgnoreCase(Arr) && Path.isEmpty() && Arr.contains(":")){
+                    //Path.add(curDirecotry);
+                    PathChecker.replace(Arr,PathChecker.get(Arr)+1);
+                    return Path;
+                }
+
+                if(curDirecotry.equalsIgnoreCase(Arr) && Path.isEmpty() && countpath == PathChecker.get(Arr)){
+                    //Path.add(curDirecotry);
+                    PathChecker.replace(Arr,PathChecker.get(Arr)+1);
                     return Path;
                 }
                 Path.add(curDirecotry);
@@ -132,12 +141,11 @@ public class AlberoRicerca{
         Checker.clear();
         for(String p : Path){
             //System.out.print(p + "\n");
-            Checker.put(p,0);
+            Checker.put(p.toLowerCase(),0);
         }
     }
 
     public ArrayList<String> GetPath(int NumPath){
-
         int pos = 0;
         int oldpos = 0;
         String curDirecotry;
@@ -182,7 +190,7 @@ public class AlberoRicerca{
             node = Q.remove();
             for(int i = 0; i<node.getChildCount(); i++){
                 Q.add(node.getChildAt(i));
-                if(node.getChildAt(i).toString().equals(Dato)){
+                if(node.getChildAt(i).toString().equalsIgnoreCase(Dato)){
                     return true;
                 }
 
@@ -202,7 +210,7 @@ public class AlberoRicerca{
         while(!Q.isEmpty()){
             node = Q.remove();
 
-            if (node.toString().equals(Dato)) {
+            if (node.toString().equalsIgnoreCase(Dato)) {
                 return true;
             }
 
@@ -215,15 +223,11 @@ public class AlberoRicerca{
         ArrayList<String> Path = GetParzialePath(numPath,Dato);
         //if(Exsist(root,Dato)) return;
         System.out.print("\n" + Path + "Insert: "+ Dato + "\n");
-        TreeNode pre = null;
         boolean check = true;
         for(String Direcotry: Path){
             for(int i = 0; i<node.getChildCount(); i++){
                 if(node.getChildAt(i).toString().equals(Direcotry)) {
-                    //if(ExsistOnLevel(node,Dato)) return;
-                    pre = node;
                     node = node.getChildAt(i);
-                    //if(ExsistOnLevel(node,Dato)) return;
                     check = true;
                     break;
                 }
@@ -237,8 +241,6 @@ public class AlberoRicerca{
         }
 
         if(ExsistOnLevel(node,Dato)) return;
-        if(pre != null){if(ExsistOnLevel(pre,Dato)) return;}
-
         ((DefaultMutableTreeNode)node).add(new DefaultMutableTreeNode(Dato));
 
     }
