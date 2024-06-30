@@ -15,7 +15,7 @@ public class Home implements Pagine {
     private JPanel BodyContainer;
     private JPanel ToolBar;
     private JPanel Body;
-    private JTextField textField1;
+    private JTextField FileName;
     private JPanel SerchPanel;
     private JButton DirecotryShowser;
     private JButton Cerca;
@@ -62,7 +62,7 @@ public class Home implements Pagine {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BodyContainer.removeAll();
-                BodyContainer.add(new FileRoot(frame, controller).getPanel(),gbc);
+                BodyContainer.add(new FileRoot(frame, controller,FileName.getText()).getPanel(),gbc);
                 BodyContainer.revalidate();  // Aggiorna il layout
                 BodyContainer.repaint();
             }

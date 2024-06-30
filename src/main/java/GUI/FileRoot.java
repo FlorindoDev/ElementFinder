@@ -17,14 +17,15 @@ public class FileRoot implements Pagine {
     private JPanel MainPanel;
     private JTree tree1;
     private JScrollPane ScrollPane;
-
     private String Path;
-
     private  final Controller controller;
 
-    FileRoot(final MainJFrame frame,  Controller controller){
+    private String StringToFind;
+
+    FileRoot(final MainJFrame frame,  Controller controller, String Name){
 
         this.controller = controller;
+        this.StringToFind = Name;
 
         tree1.addMouseListener(new MouseAdapter() {
             @Override
@@ -36,10 +37,6 @@ public class FileRoot implements Pagine {
                 boolean check = false;
                 if(tp != null){
                     for(int i = 1; i< tp.getPathCount(); i++){
-                        /*if(!(Out.contains("C:\\")) || check){
-                            Out += "\\" + tp.getPathComponent(i).toString();
-                        }
-                        check = true;*/
                         if(Out.length() == 3 && !check){
                             check =true;
                         }else{
@@ -72,7 +69,7 @@ public class FileRoot implements Pagine {
         System.out.print("\n" + Path);
         AlberoRicerca a = null;
         try {
-            a = new AlberoRicerca("*accordo-del*",Path);
+            a = new AlberoRicerca(StringToFind,Path);
             tree1 = a.getTree();
 
         } catch (ElemetNotFound e) {

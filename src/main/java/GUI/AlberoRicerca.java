@@ -185,8 +185,9 @@ public class AlberoRicerca{
     }
 
     public String FortmatRicerca(String Ric){
+        Ric = Ric.trim();
         Ric = Ric.replace(" ", "*");
-        return Ric;
+        return "*" + Ric + "*";
     }
     public JTree getTree(){return tree;}
 
