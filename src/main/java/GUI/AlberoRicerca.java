@@ -8,9 +8,7 @@ import javax.swing.tree.TreeNode;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 
 public class AlberoRicerca{
@@ -25,6 +23,8 @@ public class AlberoRicerca{
     private final JTree tree;
 
     private String Path;
+
+    private final HashMap<String, Integer> PathChecker = new HashMap<>();
 
 
     public AlberoRicerca(String Ricerca, String Path) throws ElemetNotFound{
@@ -83,6 +83,54 @@ public class AlberoRicerca{
 
 
     public ArrayList<String> GetParzialePath(int NumPath, String Arr){
+        //System.out.print("get: " + Arr + "\n");
+        int pos = 0;
+        int oldpos = 0;
+        int countpath = 0;
+
+        String curDirecotry;
+        ArrayList<String> Path = new ArrayList<>();
+        while(pos != -1) {
+            pos = (PathFileFound.get(NumPath).substring(oldpos)).indexOf("\\");
+
+            if (pos == -1) {
+                curDirecotry = PathFileFound.get(NumPath).substring(oldpos);
+            } else {
+                curDirecotry = PathFileFound.get(NumPath).substring(oldpos, pos+oldpos);
+            }
+
+            //System.out.print("\n" + curDirecotry + pos);
+            if((!curDirecotry.equalsIgnoreCase(Arr) || Path.isEmpty()) || countpath < PathChecker.get(Arr)){
+                Path.add(curDirecotry);
+                if(curDirecotry.equalsIgnoreCase(Arr)){
+                    countpath++;
+                }
+            }else{
+                PathChecker.replace(Arr,PathChecker.get(Arr)+1);
+                //System.out.print("get2: " + Path + countpath + "\n");
+                //System.out.print(PathChecker);
+                return Path;
+            }
+
+
+            oldpos = pos+oldpos+1;
+
+        }
+
+        PathChecker.replace(Arr,PathChecker.get(Arr)+1);
+        return Path;
+
+    }
+
+    public void initPathChecker(HashMap<String, Integer> Checker, ArrayList<String> Path){
+        for(String p : Path){
+            //System.out.print(p + "\n");
+            Checker.put(p,0);
+        }
+    }
+
+    public ArrayList<String> GetPath(int NumPath){
+
         int pos = 0;
         int oldpos = 0;
         String curDirecotry;
@@ -97,29 +145,22 @@ public class AlberoRicerca{
             }
 
             //System.out.print("\n" + curDirecotry + pos);
-            if(!curDirecotry.equalsIgnoreCase(Arr) || Path.isEmpty()){
-                Path.add(curDirecotry);
-            }else{
-                return Path;
-            }
 
+            Path.add(curDirecotry);
 
             oldpos = pos+oldpos+1;
 
         }
 
         return Path;
-
-    }
-
-    public ArrayList<String> GetPath(int NumPath){
-        return GetParzialePath(NumPath,"");
     }
 
     public void CreateTree(){
 
         for(int i = 0 ; i<PathFileFound.size(); i++){
-            for(String p : GetPath(i)){
+            ArrayList<String> Path = GetPath(i);
+            initPathChecker(PathChecker,Path);
+            for(String p : Path){
                 InsertIntoTree(root, p, i);
             }
 
@@ -167,10 +208,12 @@ public class AlberoRicerca{
         ArrayList<String> Path = GetParzialePath(numPath,Dato);
         //if(Exsist(root,Dato)) return;
         //System.out.print(Path);
+        //TreeNode Prec= null;
         for(String Direcotry: Path){
             for(int i = 0; i<node.getChildCount(); i++){
                 if(node.getChildAt(i).toString().equals(Direcotry)) {
                     if(ExsistOnLevel(node,Dato)) return;
+                    //Prec = node;
                     node = node.getChildAt(i);
                     if(ExsistOnLevel(node,Dato)) return;
                     break;
@@ -179,6 +222,12 @@ public class AlberoRicerca{
             }
 
         }
+        /*
+        if(node != null){
+            if(ExsistOnLevel(Prec,Dato)) return;
+            if(ExsistOnLevel(node,Dato)) return;
+        }*/
+
 
         ((DefaultMutableTreeNode)node).add(new DefaultMutableTreeNode(Dato));
 

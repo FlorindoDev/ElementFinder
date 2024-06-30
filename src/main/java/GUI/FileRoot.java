@@ -48,8 +48,8 @@ public class FileRoot implements Pagine {
                     File file = new File(Out);
                     try {
                         desktop.open(file);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
+                    } catch (IOException | IllegalArgumentException ex) {
+                        JOptionPane.showMessageDialog(null, "Path non trovato, Messaggio:\n" + ex.getMessage() , "Errore Path", JOptionPane.WARNING_MESSAGE);
                     }
                 }
 
