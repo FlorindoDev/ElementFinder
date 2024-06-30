@@ -218,7 +218,7 @@ public class AlberoRicerca{
 
     public void InsertIntoTree(TreeNode node, String Dato, int numPath){
         ArrayList<String> Path = GetParzialePath(numPath,Dato);
-        System.out.print("\n" + Path + "Insert: "+ Dato + "\n");
+        //System.out.print("\n" + Path + "Insert: "+ Dato + "\n");
         boolean check = true;
         for(String Direcotry: Path){
             for(int i = 0; i<node.getChildCount(); i++){
