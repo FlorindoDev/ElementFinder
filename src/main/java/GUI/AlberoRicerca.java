@@ -32,6 +32,7 @@ public class AlberoRicerca{
         this.Path = this.Path.trim();
         this.Path = this.Path + "\\";
         Ricerca = FortmatRicerca(Ricerca);
+        //System.out.print("Get-ChildItem -Path '"+ Path + "' -Recurse -Filter '"+ Ricerca +"' -ErrorAction SilentlyContinue | Select-Object @{Expression={$_.FullName}} | Out-String -Width " + lenghtStringOutConsole);
         FindElement("Get-ChildItem -Path '"+ Path + "' -Recurse -Filter '"+ Ricerca +"' -ErrorAction SilentlyContinue | Select-Object @{Expression={$_.FullName}} | Out-String -Width " + lenghtStringOutConsole);
         CreateTree();
         tree = new JTree(root);

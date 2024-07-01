@@ -34,7 +34,7 @@ public class FileRoot implements Pagine {
                 if (e.getClickCount() == 2 && !e.isConsumed()) {
                     e.consume();
                     TreePath tp = tree1.getPathForLocation(e.getX(), e.getY());
-                    System.out.printf(String.valueOf(tp) + "\n");
+                    //System.out.printf(String.valueOf(tp) + "\n");
                     Desktop desktop = Desktop.getDesktop();
                     String Out = Path;
                     boolean check = false;
@@ -47,7 +47,7 @@ public class FileRoot implements Pagine {
                             }
 
                         }
-                        System.out.printf(Out + "\n");
+                        //System.out.printf(Out + "\n");
                         File file = new File(Out);
                         try {
                             desktop.open(file);
@@ -70,7 +70,7 @@ public class FileRoot implements Pagine {
 
         this.Path = controller.getPath();
 
-        System.out.print("\n" + Path);
+        //System.out.print("\n" + Path);
         AlberoRicerca a = null;
         try {
             a = new AlberoRicerca(StringToFind,Path);
