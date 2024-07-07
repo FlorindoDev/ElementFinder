@@ -1,9 +1,14 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MainJFrame  extends JFrame {
 
+    //Colori:
+        static Color BackGround = new Color(63, 63, 63);
+
+    //-------------
     String NomeApp = "Element Finder";
 
     public MainJFrame(String Nome, int W, int H){

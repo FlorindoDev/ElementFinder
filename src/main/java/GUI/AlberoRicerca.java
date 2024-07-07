@@ -16,7 +16,7 @@ public class AlberoRicerca{
 
     ArrayList<String> PathFileFound = new ArrayList<>();
 
-    private final DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
+    private final DefaultMutableTreeNode root = new PersonalMutableNode("Root");
 
     private  final  int lenghtStringOutConsole = 8192;
 
@@ -35,7 +35,7 @@ public class AlberoRicerca{
         //System.out.print("Get-ChildItem -Path '"+ Path + "' -Recurse -Filter '"+ Ricerca +"' -ErrorAction SilentlyContinue | Select-Object @{Expression={$_.FullName}} | Out-String -Width " + lenghtStringOutConsole);
         FindElement("Get-ChildItem -Path '"+ Path + "' -Recurse -Filter '"+ Ricerca +"' -ErrorAction SilentlyContinue | Select-Object @{Expression={$_.FullName}} | Out-String -Width " + lenghtStringOutConsole);
         CreateTree();
-        tree = new JTree(root);
+        tree = new PersonalJTree(root);
 
     }
 
@@ -238,7 +238,7 @@ public class AlberoRicerca{
         }
 
         if(ExsistOnLevel(node,Dato)) return;
-        ((DefaultMutableTreeNode)node).add(new DefaultMutableTreeNode(Dato));
+        ((DefaultMutableTreeNode)node).add(new PersonalMutableNode(Dato));
 
     }
 

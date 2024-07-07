@@ -82,17 +82,6 @@ public class FileRoot implements Pagine {
 
         }
 
-        tree1.setToggleClickCount(1);
-
-        //-------------------
-        DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree1.getCellRenderer();
-        Icon closedIcon = new ImageIcon("src/main/java/immagini/folder.png");
-        Icon openIcon = new ImageIcon("src/main/java/immagini/open-folder.png");
-        Icon leafIcon = new ImageIcon("src/main/java/immagini/leaf.png");
-        renderer.setClosedIcon(closedIcon);
-        renderer.setOpenIcon(openIcon);
-        renderer.setLeafIcon(leafIcon);
-        //-------------------
 
         ScrollPane = new JScrollPane();
         ScrollPane.add(tree1);
