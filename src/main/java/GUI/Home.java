@@ -13,7 +13,7 @@ public class Home implements Pagine {
     private JPanel MainJpanel;
     private JPanel ToolBarContainer;
     private JPanel BodyContainer;
-    private JPanel ToolBar;
+    private JPanel TopBar;
     private JPanel Body;
     private JTextField FileName;
     private JPanel SerchPanel;

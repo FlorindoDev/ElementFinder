@@ -9,7 +9,7 @@ public class Main {
 
         final MainJFrame frame = new MainJFrame("Element Finder", 1500,700);
         frame.SetPanel(new Home(frame, controller).getPanel());
-        frame.Resize(1400,700);
+        frame.Resize(950,1200);
 
     }
 

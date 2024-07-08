@@ -6,7 +6,7 @@ import java.awt.*;
 public class MainJFrame  extends JFrame {
 
     //Colori:
-        static Color BackGround = new Color(63, 63, 63);
+        static Color BackGround = new Color(255, 255, 255);
 
     //-------------
     String NomeApp = "Element Finder";
