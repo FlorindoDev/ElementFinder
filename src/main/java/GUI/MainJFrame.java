@@ -1,12 +1,16 @@
 package GUI;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class MainJFrame  extends JFrame {
 
     //Colori:
         static Color BackGround = new Color(255, 255, 255);
+        static Border ColoreBordi = BorderFactory.createLineBorder(Color.BLACK, 1);
+        //static Color NodeClicked = new Color(168, 154, 154);
+        //static Color NodeNonClicked = new Color(143, 133, 133);
 
     //-------------
     String NomeApp = "Element Finder";

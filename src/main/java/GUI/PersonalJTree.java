@@ -3,6 +3,7 @@ package GUI;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
+import java.awt.*;
 
 public class PersonalJTree extends JTree {
 
@@ -16,6 +17,12 @@ public class PersonalJTree extends JTree {
         renderer.setClosedIcon(closedIcon);
         renderer.setOpenIcon(openIcon);
         renderer.setLeafIcon(leafIcon);
+        renderer.setBackgroundNonSelectionColor(MainJFrame.BackGround);
+        renderer.setBackgroundSelectionColor(MainJFrame.BackGround);
+
+        Font font = renderer.getFont();
+        renderer.setFont(font.deriveFont(Font.BOLD));
+        renderer.setForeground(Color.BLACK);
         //-------------------
         this.setToggleClickCount(1); //click per aprire cartelle
         this.setBackground(MainJFrame.BackGround);

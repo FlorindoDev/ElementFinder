@@ -20,13 +20,17 @@ public class Home implements Pagine {
     private JButton DirecotryShowser;
     private JButton Cerca;
     private JLabel TextCerca;
+    private JPanel CercaBox;
     private final MainJFrame frame;
     Controller controller;
 
     public Home(final MainJFrame frame, Controller controller){
         this.frame = frame;
         this.controller = controller;
-
+        SerchPanel.setBackground(MainJFrame.BackGround);
+        MainJpanel.setBackground(MainJFrame.BackGround);
+        CercaBox.setBackground(MainJFrame.BackGround);
+        TopBar.setBackground(MainJFrame.BackGround);
         DirecotryShowser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,6 +60,8 @@ public class Home implements Pagine {
         gbc.weightx = 1.0; // Fa sì che il componente si espanda orizzontalmente
 
         ToolBarContainer.add(new ToolBar(frame).getPanel());
+
+        ToolBarContainer.setBackground(MainJFrame.BackGround);
 
         Cerca = new JButton();
         Cerca.addActionListener(new ActionListener() {

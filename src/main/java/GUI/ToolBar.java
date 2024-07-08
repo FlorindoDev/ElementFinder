@@ -11,6 +11,7 @@ public class ToolBar implements Pagine {
 
     public ToolBar(final MainJFrame frame){
         TitoloApp.setText(frame.getNomeApp());
+        TitoloApp.setBackground(MainJFrame.BackGround);
 
     }
 

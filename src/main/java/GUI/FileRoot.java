@@ -5,6 +5,7 @@ import ExCustom.ElemetNotFound;
 import Interfaccie.Pagine;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreePath;
@@ -84,6 +85,8 @@ public class FileRoot implements Pagine {
 
 
         ScrollPane = new JScrollPane();
+
+        ScrollPane.setBorder(MainJFrame.ColoreBordi);
         ScrollPane.add(tree1);
 
     }
