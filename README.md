@@ -1,5 +1,5 @@
 # Funzionamento
-  - il bottone `start` scegli la `Dir` in cui vuoi inziare
+  - il bottone `start` scegli la `Dir` in cui vuoi inziare a cercare
   - il bottone `cerca` inzia la ricerca di quello che hai inserito nel `TextArea`
   - se clici `cerca` senza nulla ti prendera `tutto`
 # Requisiti
