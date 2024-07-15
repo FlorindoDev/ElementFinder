@@ -8,6 +8,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeNode;
 import java.awt.*;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
@@ -46,7 +47,7 @@ public class AlberoRicerca{
 
         if(Main.isWindows){
 
-            String[] cmd = {"powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", command};
+            String[] cmd = {"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", command};
 
             ProcessBuilder builder = new ProcessBuilder(cmd);
             builder.redirectErrorStream(true);
