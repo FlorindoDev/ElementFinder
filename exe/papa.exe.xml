@@ -2,8 +2,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>C:\Users\filix\Desktop\ElementFinder\ElementFinder.jar</jar>
-  <outfile>C:\Users\filix\Desktop\ElementFinder\papa.exe</outfile>
+  <jar>ElementFinder.jar</jar>
+  <outfile>papa.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>C:\Users\filix\Desktop\164-1645486_magnifying-glass-icon-windows-attention-to-detail-icons.ico</icon>
+  <icon>img.ico</icon>
   <jre>
     <path>%JAVA_HOME%;%PATH%</path>
     <requiresJdk>false</requiresJdk>
