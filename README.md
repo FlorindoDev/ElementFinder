@@ -5,4 +5,4 @@
 # Requisiti
   - `Java 21`
   - `JDK 21`
-  - `minimo JRE 1.17.0`
+  - `minimo JRE 17.0.0`
